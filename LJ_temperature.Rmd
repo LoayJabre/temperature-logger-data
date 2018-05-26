@@ -1,0 +1,105 @@
+---
+title: "temperature loggers"
+author: "Loay Jabre"
+output: html_document
+---
+
+Date and time last editted: 
+```{r}
+#this displays the date this file was written 
+Sys.time()
+```
+
+Set Temperature: 3C
+Thermostat Position: Middle, air 
+Comments: 
+
+```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
+require(ggplot2)
+require(dplyr)
+require(lubridate)
+require(dplyr)
+require(citr)
+require(reshape2)
+require(scales)
+```
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, results='hide'}
+getwd()
+dir()
+````
+
+Water Temperature 
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
+watertemp = read.csv("LJ_20180524_L2_1_w.csv", header = FALSE, sep =",")
+```
+
+```{r include=FALSE}
+##Removing all the useless raw output from the logger
+
+watertemp1 = watertemp [-(1:200), -c(1,4, 5, 6)]
+names(watertemp1)= c("time", "temperature")
+
+##The logger exports the temperature as a factor. So, we need to convert it to a number. is a little more than just a as.numeric because the code was showing the wrong value at first. 
+watertemp1$temperature = as.numeric(as.character(watertemp1$temperature))
+
+##This uses lubridate to convert the dates into a useable format. 
+watertemp1$time = ymd_hms(watertemp1$time)
+
+
+```
+
+
+```{r echo=FALSE}
+boxplot(watertemp1$temperature)
+
+ggplot(watertemp1, aes(x=time, y=temperature))+
+  #the following line x=time assigns x and y axis labels
+  geom_line(mapping=aes(x=time, y=temperature), data = NULL)+
+    coord_cartesian(ylim =c(0,3) )
+
+
+
+
+
+
+```
+
+
+
+Air temperature 
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
+airtemp = read.csv("LJ_20180524_L1_1.csv", header = FALSE, sep =",")
+```
+
+```{r include=FALSE}
+##Removing all the useless raw output from the logger
+
+airtemp1 = airtemp [-(1:200), -c(1,4, 5, 6)]
+names(airtemp1)= c("atime", "atemperature")
+
+##The logger exports the temperature as a factor. So, we need to convert it to a number. is a little more than just a as.numeric because the code was showing the wrong value at first. 
+airtemp1$atemperature = as.numeric(as.character(airtemp1$atemperature))
+
+##This uses lubridate to convert the dates into a useable format. 
+airtemp1$atime = ymd_hms(airtemp1$atime)
+
+```
+
+
+```{r echo=FALSE}
+boxplot(airtemp1$atemperature)
+
+
+
+ggplot(airtemp1, aes(x=atime, y=atemperature))+
+  #the following line x=time assigns x and y axis labels
+  geom_line(mapping=aes(x=atime, y=atemperature), data = NULL)+
+    coord_cartesian(ylim =c(0,3) )
+
+
+```
