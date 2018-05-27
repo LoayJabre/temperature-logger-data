@@ -32,7 +32,6 @@ dir()
 ````
 
 Water Temperature 
-
 ```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
 #Import the raw csv file from the temperature loggers
 watertemp = read.csv("LJ_20180524_L2_1_w.csv", header = FALSE, sep =",")
@@ -44,19 +43,29 @@ watertemp = read.csv("LJ_20180524_L2_1_w.csv", header = FALSE, sep =",")
 watertemp1 = watertemp [-(1:200), -c(1,4, 5, 6)]
 names(watertemp1)= c("time", "temperature")
 
-typeof("temperature")
-typeof ("time")
+class(watertemp1$temperature)
+class(watertemp1$time)
 
 ##The logger exports the temperature as a factor. So, we need to convert it to a number. is a little more than just a as.numeric because the code was showing the wrong value at first. 
 watertemp1$temperature = as.numeric(as.character(watertemp1$temperature))
-typeof("temperature")
 
 ##This uses lubridate to convert the dates into a useable format. 
 watertemp1$time = ymd_hms(watertemp1$time)
 
-
+class(watertemp1$temperature)
+class(watertemp1$time)
 ```
 
+```{r include=FALSE}
+#Seperating the time into individual year, month, day etc. 
+
+watertemp1$year = format(watertemp1$time,"%Y")
+watertemp1$month = format (watertemp1$time, "%m")
+watertemp1$day = format (watertemp1$time, "%d")
+watertemp1$hour = format (watertemp1$time, "%H")
+watertemp1$minute = format (watertemp1$time, "%M")
+
+```
 
 ```{r echo=FALSE}
 boxplot(watertemp1$temperature)
@@ -65,7 +74,11 @@ boxplot(watertemp1$temperature)
 ggplot(watertemp1, aes(x=time, y=temperature))+
   #the following line x=time assigns x and y axis labels
   geom_line()+
-    coord_cartesian(ylim =c(0,5) )
+  coord_cartesian(ylim =c(1.5,2.5))+
+  theme(panel.grid = element_blank(),
+        panel.background = element_rect(fill = "white"),
+        panel.border = element_rect(colour = "black", fill = NA,size = 0.2))
+
 
 ```
 
@@ -81,8 +94,8 @@ airtemp = read.csv("LJ_20180524_L1_1.csv", header = FALSE, sep =",")
 ```{r include=FALSE}
 ##Removing all the useless raw output from the logger
 
-airtemp1 = airtemp [-(1:200), -c(1,4, 5, 6)]
-names(airtemp1)= c("atime", "atemperature")
+airtemp1 = airtemp [-(1:20), -c(1,4, 5, 6)]
+names(airtemp1)= c("atime","atemperature")
 
 ##The logger exports the temperature as a factor. So, we need to convert it to a number. is a little more than just a as.numeric because the code was showing the wrong value at first. 
 airtemp1$atemperature = as.numeric(as.character(airtemp1$atemperature))
@@ -91,7 +104,6 @@ airtemp1$atemperature = as.numeric(as.character(airtemp1$atemperature))
 airtemp1$atime = ymd_hms(airtemp1$atime)
 
 ```
-
 
 ```{r echo=FALSE}
 boxplot(airtemp1$atemperature)
