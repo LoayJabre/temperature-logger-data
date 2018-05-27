@@ -2,6 +2,8 @@
 title: "temperature loggers"
 author: "Loay Jabre"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 Date and time last editted: 
@@ -31,8 +33,8 @@ dir()
 
 Water Temperature 
 
-
 ```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
+#Import the raw csv file from the temperature loggers
 watertemp = read.csv("LJ_20180524_L2_1_w.csv", header = FALSE, sep =",")
 ```
 
@@ -42,8 +44,12 @@ watertemp = read.csv("LJ_20180524_L2_1_w.csv", header = FALSE, sep =",")
 watertemp1 = watertemp [-(1:200), -c(1,4, 5, 6)]
 names(watertemp1)= c("time", "temperature")
 
+typeof("temperature")
+typeof ("time")
+
 ##The logger exports the temperature as a factor. So, we need to convert it to a number. is a little more than just a as.numeric because the code was showing the wrong value at first. 
 watertemp1$temperature = as.numeric(as.character(watertemp1$temperature))
+typeof("temperature")
 
 ##This uses lubridate to convert the dates into a useable format. 
 watertemp1$time = ymd_hms(watertemp1$time)
@@ -55,15 +61,11 @@ watertemp1$time = ymd_hms(watertemp1$time)
 ```{r echo=FALSE}
 boxplot(watertemp1$temperature)
 
+
 ggplot(watertemp1, aes(x=time, y=temperature))+
   #the following line x=time assigns x and y axis labels
-  geom_line(mapping=aes(x=time, y=temperature), data = NULL)+
-    coord_cartesian(ylim =c(0,3) )
-
-
-
-
-
+  geom_line()+
+    coord_cartesian(ylim =c(0,5) )
 
 ```
 
@@ -95,11 +97,9 @@ airtemp1$atime = ymd_hms(airtemp1$atime)
 boxplot(airtemp1$atemperature)
 
 
-
-ggplot(airtemp1, aes(x=atime, y=atemperature))+
+ggplot(airtemp1, aes(x = atime, y = atemperature))+
   #the following line x=time assigns x and y axis labels
-  geom_line(mapping=aes(x=atime, y=atemperature), data = NULL)+
+  geom_line(mapping = aes(x = atime, y = atemperature), data = NULL)+
     coord_cartesian(ylim =c(0,3) )
-
 
 ```
