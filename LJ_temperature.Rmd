@@ -7,6 +7,7 @@ editor_options:
 ---
 
 Date and time last editted: 
+this is edit for kosay to see
 ```{r}
 #this displays the date this file was written 
 Sys.time()
