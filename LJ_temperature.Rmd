@@ -13,7 +13,7 @@ this is edit for kosay to see
 Sys.time()
 ```
 
-#Set Temperature: 3C
+#Set Temperature: 2.5C
 #Thermostat Position: Middle, air 
 #Comments: 
 
@@ -35,8 +35,8 @@ dir()
 ```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
 #Import the raw csv file from the temperature loggers
 #If you have two water temperatures, name them watertemp1 and watertemp2
-temp1raw = read.csv("LJ_20180524_L1_1.csv", header = FALSE, sep =",")
-temp2raw = read.csv("LJ_20180524_L2_1_w.csv", header = FALSE, sep =",")
+temp1raw = read.csv("LJ_20180528_L1_1_w.csv", header = FALSE, sep =",")
+temp2raw = read.csv("LJ_20180528_L2_1_w.csv", header = FALSE, sep =",")
 ```
 
 
@@ -82,7 +82,7 @@ boxplot(temp1$temperature)
 ggplot(temp1, aes(x=time, y=temperature))+
   #the following line x=time assigns x and y axis labels
   geom_line()+
-  coord_cartesian(ylim =c(0,3)) +
+  coord_cartesian(ylim =c(-2,1)) +
   scale_x_datetime(date_breaks = "2 hour",  labels = date_format("%m/%d - %H:%M")) +
   #theme_bw or _ whatever are just preset themes to help with making the graph look a certain way
   theme_bw()+
@@ -107,7 +107,7 @@ boxplot(temp2$temperature)
 ggplot(temp2, aes(x=time, y=temperature))+
   #the following line x=time assigns x and y axis labels
   geom_line()+
-  coord_cartesian(ylim =c(0,3)) +
+  coord_cartesian(ylim =c(-2,1)) +
   scale_x_datetime(date_breaks = "2 hour",  labels = date_format("%m/%d - %H:%M")) +
   #theme_bw or _ whatever are just preset themes to help with making the graph look a certain way
   theme_bw()+
