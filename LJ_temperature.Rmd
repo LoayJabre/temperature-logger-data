@@ -8,7 +8,7 @@ editor_options:
 
 Date and time last editted: 
 this is edit for kosay to see
-```{r}
+```{r echo=FALSE}
 #this displays the date this file was written 
 Sys.time()
 ```
@@ -92,13 +92,13 @@ ggplot(temp1, aes(x=time, y=temperature))+
 
   
 #another way to play there "theme". Basically you control the way the gram looks
-  theme (panel.grid = element_blank(),
-        panel.background = element_rect(fill = "white"),
-        panel.border = element_rect(colour = "black", fill = NA,size = 0.2))
+  #theme (panel.grid = element_blank(),
+       # panel.background = element_rect(fill = "white"),
+       # panel.border = element_rect(colour = "black", fill = NA,size = 0.2))
 ```
 
 Temperature 2
-```{r}
+```{r echo=FALSE}
 
 #One thing that I need to do is learn to make loops. This way I am not repeating the same code for two different plots. 
 boxplot(temp2$temperature)
