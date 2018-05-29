@@ -159,11 +159,11 @@ ggtitle("Water Temperature")+
 ```{r echo=FALSE}
 #Both on the same line
 
-ggplot(data = temp, aes(x=logger, y=temperature))+
-geom_boxplot(notch = FALSE)+
-theme_bw()+
-xlab ("")+
-  ylab ("Temperature (C)")
+##ggplot(data = temp, aes(x=logger, y=temperature))+
+##geom_boxplot(notch = FALSE)+
+##theme_bw()+
+##xlab ("")+
+##ylab ("Temperature (C)")
 
 
 ggplot(temp, aes(x=time, y=temperature, colour = logger))+
