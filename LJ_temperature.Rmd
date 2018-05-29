@@ -15,7 +15,9 @@ Sys.time()
 
 Set Temperature: 2.5C    
 Thermostat Position: Middle, air   
-Comments: 
+Logger 1: Air    
+Logger 2: Water    
+Comments: Logger 1&2 Calibrated (+0.2C to logger 1), thermostat calibrated (-0.5C)  
 
 ```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
 require(ggplot2)
@@ -35,8 +37,8 @@ dir()
 ```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
 #Import the raw csv file from the temperature loggers
 #If you have two water temperatures, name them watertemp1 and watertemp2
-temp1raw = read.csv("LJ_20180528_L1_1_w.csv", header = FALSE, sep =",")
-temp2raw = read.csv("LJ_20180528_L2_1_w.csv", header = FALSE, sep =",")
+temp1raw = read.csv("LJ_20180529_L1_1.csv", header = FALSE, sep =",")
+temp2raw = read.csv("LJ_20180529_L2_1_w.csv", header = FALSE, sep =",")
 ```
 
 
@@ -90,17 +92,31 @@ names(temp)= c("time", "logger", "temperature")
 
 boxplot(temp3$temperature1)
 
+
+ggplot(data = temp3, aes(x=temperature1))+
+geom_histogram(bins=30)+
+theme_bw()+
+xlab ("Temperature (C)")+
+  ylab ("Frequency")+
+  coord_cartesian(xlim=c(0,3))+
+  ggtitle("Air Temperature")+
+ theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))         
+  
+
 ggplot(temp3, aes(x=time, y=temperature1))+
   #the following line x=time assigns x and y axis labels
   geom_line()+
-  coord_cartesian(ylim =c(-3,1)) +
-  scale_x_datetime(date_breaks = "4 hour",  labels = date_format("%m/%d - %H:%M")) +
+  coord_cartesian(ylim =c(0,3)) +
+  scale_x_datetime(date_breaks = "1 hour",  labels = date_format("%m/%d - %H:%M")) +
   #theme_bw or _ whatever are just preset themes to help with making the graph look a certain way
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0)) + 
   xlab ("Time")+
-  ylab ("Temperature (C)")
-
+  ylab ("Temperature (C)")+
+ggtitle("Air Temperature")+
+ theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0)) 
+  
   
 #another way to play there "theme". Basically you control the way the gram looks
   #theme (panel.grid = element_blank(),
@@ -115,16 +131,28 @@ ggplot(temp3, aes(x=time, y=temperature1))+
 boxplot(temp3$temperature2)
 
 
+
+ggplot(data = temp3, aes(x=temperature2))+
+geom_histogram(bins=20)+
+xlab ("Temperature (C)")+
+  ylab ("Frequency")+
+  coord_cartesian(xlim=c(0,3))+
+  ggtitle("Water Temperature")+
+ theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))
+  
+
 ggplot(temp3, aes(x=time, y=temperature2))+
-  #the following line x=time assigns x and y axis labels
   geom_line()+
-  coord_cartesian(ylim =c(-2,1)) +
-  scale_x_datetime(date_breaks = "4 hour",  labels = date_format("%m/%d - %H:%M")) +
-  #theme_bw or _ whatever are just preset themes to help with making the graph look a certain way
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0)) + 
+  coord_cartesian(ylim =c(0,3)) +
+  scale_x_datetime(date_breaks = "1 hour",  labels = date_format("%m/%d - %H:%M")) +
   xlab ("Time")+
-  ylab ("Temperature(C)")
+  ylab ("Temperature(C)")+
+ggtitle("Water Temperature")+
+ theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))+
+    theme(axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0)) 
+
 
 ```
 
@@ -132,21 +160,20 @@ ggplot(temp3, aes(x=time, y=temperature2))+
 #Both on the same line
 
 ggplot(data = temp, aes(x=logger, y=temperature))+
-geom_boxplot(notch = TRUE)+
+geom_boxplot(notch = FALSE)+
 theme_bw()+
 xlab ("")+
   ylab ("Temperature (C)")
 
 
 ggplot(temp, aes(x=time, y=temperature, colour = logger))+
-  #the following line x=time assigns x and y axis labels
   geom_line()+
-  coord_cartesian(ylim =c(-3,1)) +
-  scale_x_datetime(date_breaks = "4 hour",  labels = date_format("%m/%d - %H:%M")) +
-  #theme_bw or _ whatever are just preset themes to help with making the graph look a certain way
+  coord_cartesian(ylim =c(0,3)) +
+  scale_x_datetime(date_breaks = "1 hour",  labels = date_format("%m/%d - %H:%M")) +
   theme_bw()+
   theme(axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0)) + 
   xlab ("Time")+
-  ylab ("Temperature (C)")
+  ylab ("Temperature (C)") +
+  theme(legend.position = "top")
 ```
 
