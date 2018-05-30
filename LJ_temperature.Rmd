@@ -7,6 +7,8 @@ output:
 editor_options:
   chunk_output_type: console
 ---
+
+This is a tesst to make sure the git is still working ( I played around with folders etc)
 Date Last Editted: 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 #this displays the date this file was written 
