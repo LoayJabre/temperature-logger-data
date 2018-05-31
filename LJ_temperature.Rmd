@@ -36,11 +36,19 @@ getwd()
 dir()
 ````
 
+
+
+```{r include=FALSE}
+#this creates two strings for, one for each temperature logger. So, you enter file names here, and they are imported in the next chunk  
+logger1 <- ("LJ_20180529_L1_1.csv")
+logger2 <- ("LJ_20180529_L2_1_w.csv")
+
+```
+
 ```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
 #Import the raw csv file from the temperature loggers
-#If you have two water temperatures, name them watertemp1 and watertemp2
-temp1raw = read.csv("LJ_20180529_L1_1.csv", header = FALSE, sep =",")
-temp2raw = read.csv("LJ_20180529_L2_1_w.csv", header = FALSE, sep =",")
+temp1raw = read.csv(logger1,  header = FALSE, sep =",")
+temp2raw = read.csv(logger2, header = FALSE, sep =",")
 ```
 
 
