@@ -94,7 +94,9 @@ temp2$time2 = ymd_hms(temp2$time2)
 
 
 ```{r include=FALSE}
-#This creates a new dataset called temp, with a common timeline and the two temperatures. 
+#This creates a new dataset called temp, with a common timeline and the two #temperatures
+
+
 temp3 = cbind(temp1, temperature2=temp2$temperature2)
 
 temp = melt(data = temp3, id.vars = "time", measure.vars = c("temperature1", "temperature2"))
