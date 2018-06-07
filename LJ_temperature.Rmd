@@ -13,11 +13,11 @@ Date Last Editted:
 Sys.time()
 ```
 
-Set Temperature: 2C    
-Thermostat Position: Middle, air   
-Logger 1: Air    
+Set Temperature: 1.5C    
+Thermostat Position: Middle, air, close to shelf   
+Logger 1: Water    
 Logger 2: Water    
-Comments: Thermostat was brought down to about 1cm above the shelf (right above the temperature logger)
+Comments: Thermostat is about 7cm above the shelf. Tempterature loggers pressed down in the water beaker.
 
 ```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
 require(ggplot2)
@@ -36,8 +36,8 @@ dir()
 
 ```{r include=FALSE}
 #this creates two strings for, one for each temperature logger. So, you enter file names here, and they are imported in the next chunk  
-logger1 <- ("LJ_20180601_L1_1.csv")
-logger2 <- ("LJ_20180601_L2_1_w.csv")
+logger1 <- ("LJ_20180607_L1_1_w.csv")
+logger2 <- ("LJ_20180607_L2_1_w.csv")
 ```
 
 ```{r include=FALSE}
