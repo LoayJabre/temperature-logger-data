@@ -13,19 +13,13 @@ Date Last Editted:
 Sys.time()
 ```
 
-Set Temperature: 2C    
-Thermostat Position: Middle, air   
-Logger 1: Water    
-Logger 2: Water    
-Comments: Thermostat is about 11cm above the shelf. Tempterature loggers pressed down in the water beaker.
-Water leaked into the loggers, fridge was opened a few times.. measurement not good. 
+
 
 ```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
 require(ggplot2)
-require(dplyr)
 require(plyr)
-require(lubridate)
 require(dplyr)
+require(lubridate)
 require(reshape2)
 require(scales)
 ```
@@ -37,7 +31,7 @@ dir()
 
 ```{r include=FALSE}
 #this creates two strings for, one for each temperature logger. So, you enter file names here, and they are imported in the next chunk  
-logger1 <- ("LJ_20180612_L1_1_w.csv")
+logger1 <- ("LJ_20180827_L1.csv")
 logger2 <- ("LJ_20180612_L2_1_w.csv")
 ```
 
