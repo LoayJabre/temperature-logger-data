@@ -1,19 +1,15 @@
----
-title: "Temperature Loggers"
-author: "Loay Jabre"
-output:
-  html_document: default
-  pdf_document: default
-editor_options:
-  chunk_output_type: console
----
+Re-doing of the 6C treatment because of outlier. This is the temperature from the re-do
+
 Date Last Editted: 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 #this displays the date this file was written 
 Sys.time()
 ```
 
-
+Naming of files to input : initials_yearmonthday_Logger#_Incubator#
+Examples: LJ_20190117_L1_1
+If it was put in water, add _w at the end. 
+The date is the date logger was taken out of fridge
 
 ```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
 require(ggplot2)
@@ -24,15 +20,11 @@ require(reshape2)
 require(scales)
 ```
 
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, results='hide'}
-getwd()
-dir()
-````
 
 ```{r include=FALSE}
 #this creates two strings for, one for each temperature logger. So, you enter file names here, and they are imported in the next chunk  
-logger1 <- ("LJ_20180827_L1.csv")
-logger2 <- ("LJ_20180612_L2_1_w.csv")
+logger1 <- ("LJ_20190516_L1_1.csv")
+logger2 <- ("LJ_20190516_L2_1.csv")
 ```
 
 ```{r include=FALSE}
@@ -119,7 +111,7 @@ xlab ("Temperature (C)")+
 #time series 
 ggplot(temp3, aes(x=time, y=dataz))+
   geom_line()+
-  coord_cartesian(ylim =c(0,3)) +
+  #coord_cartesian(ylim =c(0,3)) +
   scale_x_datetime(date_breaks = "2 hour",  labels = date_format("%m/%d - %H:%M")) +
   xlab ("Time")+
   ylab ("Temperature (C)")+
@@ -133,7 +125,20 @@ ggtitle(graphtitle)+
 ```{r echo=FALSE}
 graphdata (temp3$temperature1, logger1title)
 graphdata (temp3$temperature2, logger2title)
+
 ```
+
+Logger1
+```{r}
+summary (temp3$temperature1)
+```
+
+Logger2
+```{r}
+summary (temp3$temperature2)
+
+```
+
 
 ```{r echo=FALSE}
 #Both on the same line
@@ -146,7 +151,7 @@ graphdata (temp3$temperature2, logger2title)
 
 ggplot(temp, aes(x=time, y=temperature, colour = logger))+
   geom_line()+
-  coord_cartesian(ylim =c(0,3)) +
+  #coord_cartesian(ylim =c(0,3)) +
   scale_x_datetime(date_breaks = "2 hour",  labels = date_format("%m/%d - %H:%M")) +
   theme_bw()+
   theme(axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0)) + 
