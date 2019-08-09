@@ -1,5 +1,4 @@
-Re-doing of the 6C treatment because of outlier. This is the temperature from the re-do
-
+This is a redo of the ~1C. Temperature should be ~1C. Both logges on same shelf, but the thermostat probe was a bit different. temperature is wonky and cant be trusted :( 
 Date Last Editted: 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 #this displays the date this file was written 
@@ -23,8 +22,10 @@ require(scales)
 
 ```{r include=FALSE}
 #this creates two strings for, one for each temperature logger. So, you enter file names here, and they are imported in the next chunk  
-logger1 <- ("LJ_20190516_L1_1.csv")
-logger2 <- ("LJ_20190516_L2_1.csv")
+setwd("C:/Users/Loay Jabre/Desktop/PhD/Data/Temperature Loggers/raw/temperature-logger-data")
+
+logger1 <- ("LJ_20190617_L1_1.csv")
+logger2 <- ("LJ_20190617_L2_1.csv")
 ```
 
 ```{r include=FALSE}
